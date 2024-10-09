@@ -12,8 +12,12 @@ const nextConfig = {
                 destination: "/home"        //FOLDER
             },
             {
-                source: "/segunda-rota",     //URL
+                source: "/segunda-rota",    //URL
                 destination: "/axios-page"  //FOLDER
+            },
+            {
+                source: "/terceira-rota",   //URL
+                destination: "/server-page" //FOLDER
             },
         ]
     }
