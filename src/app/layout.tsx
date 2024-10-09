@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-pallete02`}>
 
-        <Header op1={"primeira-rota"}/>
+        <Header op1={"primeira-rota"} op2={"segunda-rota"}/>
 
         <div className="w-full flex justify-end h-[580px] items-center flex-col p-[20px]">
           <Image  className="h-[70%] w-auto" src={logo} alt="ue"/>

@@ -8,9 +8,12 @@ const nextConfig = {
     rewrites: () => {
         return[
             {
-                source: "/",
-                destination: "/home"
-                
+                source: "/",                //URL
+                destination: "/home"        //FOLDER
+            },
+            {
+                source: "/segunda-rota",     //URL
+                destination: "/axios-page"  //FOLDER
             },
         ]
     }
