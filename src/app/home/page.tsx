@@ -31,10 +31,10 @@ const Home = () => {
   console.log(characters);
     
   return (
-    <div className="w-full flex justify-center min-h-screen">
+    <div className="w-full flex justify-center">
       <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
         {characters.map(item => 
-          <Card data={item}/>
+          <Card key={item.id} data={item}/>
         )}
       </div>
     </div>

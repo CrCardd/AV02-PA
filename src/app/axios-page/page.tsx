@@ -1,8 +1,10 @@
 "use client"
 
-import Card from "@/components/card";
 import { useEffect, useState } from "react";
 
+import Card from "@/components/card";
+
+import { api } from "@/constants/api"
 
 interface IData {
   id: string; 
@@ -17,36 +19,54 @@ interface IData {
 
 const Home = () => {
 
-  const [characters, setCharacters] = useState<IData[]>([]);
+  const [data, setData] = useState<IData[]>([]);
 
   const [erro, setErro] = useState<boolean>(false);
   const [errorMsg, setErroMsg] = useState<string>("Não foi possivel buscar os dados");
   const [page, setPage] = useState<string>("");
-  const [character, setCharacter] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
 
   useEffect(() =>{
-    const load = async () =>{
-        const res = await fetch("https://dragonball-api.com/api/characters");
-        const data = await res.json();
-        setCharacters(data.items);
-      }
-      load()
-    }, [])
+    api.get(`/characters?page=${page}`).then((result) => {
 
-  console.log(characters);
+      console.log(result)
+      setErro(false)
+      setData(result.data.items)
+
+      if(result.data.items == ""){
+        setErroMsg("Página não encontrada")
+        setErro(true);
+      }
+    }).catch((error) =>{
+      // if(error.response.status === 404){
+        // setErroMsg("Página não encontrada")
+        // }
+        // setErro(true);
+  })
+}, [page])
+
+  console.log(data);
     
   return (
-    <div className="w-full flex justify-center min-h-screen flex-col items-center gap-[50px]">
+    <div className="w-full flex justify-center flex-col items-center gap-[50px]">
 
       <div className="flex justify-center w-full gap-[30px]">
-        <input className="rounded-[8px] p-[5px] text-center" type="text" placeholder="Página"/>
-        <input className="rounded-[8px] p-[5px] text-center" type="text" placeholder="Personagem"/>
+        <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setPage(e.target.value)} type="text" placeholder="Página"/>
+        {/* <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setName(e.target.value)} type="text" placeholder="Personagem"/> */}
       </div>
 
+      {erro && 
+
+        <div className="w-full h-[70px] bg-red-700 justify-center flex items-center text-[20px] font-bold text-pallete01">
+          <h2>{errorMsg}</h2>
+        </div>
+      
+      }
+
       <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
-        {characters.map(item => 
-          <Card data={item}/>
+        {data.map(item => 
+          <Card key={item.id} data={item}/>
         )}
       </div>
     </div>

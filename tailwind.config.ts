@@ -12,7 +12,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
 
-        pallete01: "#F1F1F1",
+        pallete01: "#f6f6f6",
         pallete02: "#1c202b ",
         pallete03: "#535761",
         pallete04: "#efb20f"
