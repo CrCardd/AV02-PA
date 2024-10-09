@@ -34,8 +34,8 @@ export default function RootLayout({
 
         <Header op1={"primeira-rota"} op2={"segunda-rota"}/>
 
-        <div className="w-full flex justify-end h-[580px] items-center flex-col p-[20px]">
-          <Image  className="h-[70%] w-auto" src={logo} alt="ue"/>
+        <div className="w-full flex justify-center h-[580px] items-center flex-col p-[20px]">
+          <Image  className="h-auto w-[800px]" src={logo} alt="ue"/>
           <h1 className="text-pallete04 font-bold text-[50px]">Prova :)</h1>
         </div>
 
