@@ -13,9 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
 
         pallete01: "#F1F1F1",
-        pallete02: "#393d3e ",
-        pallete03: "#646a6d",
-        pallete04: "#d8a13d"
+        pallete02: "#1c202b ",
+        pallete03: "#535761",
+        pallete04: "#efb20f"
       },
     },
   },

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import localFont from "next/font/local";
 import "./globals.css";
+
+import logo from "@/app/assets/logo-api.png"
+import Header from "@/components/header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,8 +30,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-pallete02`}>
+
+        <Header op1={"primeira-rota"}/>
+
+        <div className="w-full flex justify-end h-[580px] items-center flex-col p-[20px]">
+          <Image  className="h-[70%] w-auto" src={logo} alt="ue"/>
+          <h1 className="text-pallete04 font-bold text-[50px]">Prova :)</h1>
+        </div>
+
         {children}
       </body>
     </html>
