@@ -19,7 +19,7 @@ interface IData {
 const Card = ({data}: IData) => {
     return(
         <div className="w-[300px]">
-            <div className="bg-pallete01 flex justify-center items-center h-[400px] rounded-t-[15px] relative">
+            <div className="bg-pallete01 flex justify-center items-center h-[400px] rounded-t-[15px] relative w-full">
                 <Image className="absolute w-full h-full  rounded-t-[15px]" src={cardBg} alt=''/>
                 <Image className="hover:cursor-pointer h-[110%] w-auto hover:scale-110 transition-transform duration-500 z-10" src={data.image} alt={data.image} width={1000} height={1000} priority/>
             </div>

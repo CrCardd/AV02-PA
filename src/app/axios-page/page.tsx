@@ -49,7 +49,7 @@ const Home = () => {
   console.log(data);
     
   return (
-    <div className="w-full flex justify-center flex-col items-center gap-[50px]">
+    <div className="w-full flex justify-center flex-col items-center gap-[40px]">
 
       <div className="flex justify-center w-full gap-[30px]">
         <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setPage(e.target.value)} type="text" placeholder="Página 1/6"/>

@@ -1,4 +1,4 @@
-import Card from "@/components/card";
+import Card from "@/components/cardNoImage";
 import Link from "next/link";
 import { Suspense } from "react"
 
@@ -11,7 +11,6 @@ type IData = {
     maxKi: string;
     race: string;
     gender: string;
-    image: string;
     affiliation: string;
   }[]
 
@@ -31,7 +30,7 @@ const ServerSide = async () =>{
                             return(
                                 <div key={item.id} className="relative">
                                         <Card data={item}/>
-                                        <Link href={`/character/${item.id}`} className="absolute top-[2%] left-[5%] bg-pallete04 font-bold text-pallete01 p-[10px] z-30 rounded-[7px]"> Abrir</Link>
+                                        <Link href={`/character/${item.id}`} className="absolute top-[2%] right-[5%] bg-pallete04 font-bold text-pallete01 p-[10px] z-30 rounded-[7px]"> Abrir</Link>
                                 </div>
                             )
                         })}
