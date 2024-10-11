@@ -32,6 +32,7 @@ const Pagination = ({qtd, set, className, page, totalPx}:{qtd:string, set:Functi
     return(
         <div className={className}>
 
+            
             {pags.map(item => item)}
 
 
