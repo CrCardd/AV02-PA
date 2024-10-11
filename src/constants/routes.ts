@@ -1,5 +1,5 @@
 export enum ROUTES {
-    home = "/",
+    home = "/primeira-rota",
     axios = "/segunda-rota",
     server = "/terceira-rota"
 }

@@ -1,5 +1,6 @@
 import Card from "@/components/card";
 import Image from "next/image";
+import { Suspense } from "react";
 
 interface IPerso {
     params: {
@@ -28,8 +29,12 @@ const Perso = async ({params: {id}} : IPerso) => {
 
     
     return(
-        <div className="flex justify-center items-center ">
-            <Card data={data}/>
+        <div className="flex justify-center items-center mb-[100px]">
+            <Suspense fallback={
+                <div className="bg-pallete01 p-[40px] text-[30px] font-bold "> Loading...</div>
+            }>
+                <Card data={data}/>
+            </Suspense>
         </div>
     )
 }

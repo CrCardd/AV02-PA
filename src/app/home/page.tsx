@@ -1,7 +1,7 @@
 "use client"
 
 import Card from "@/components/card";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 
 interface IData {
@@ -31,11 +31,15 @@ const Home = () => {
   console.log(characters);
     
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center mb-[100px]">
       <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
-        {characters.map(item => 
-          <Card key={item.id} data={item}/>
-        )}
+        <Suspense fallback={
+          <div className="bg-pallete01 p-[40px] text-[30px] font-bold "> Loading...</div>
+        }>
+          {characters.map(item => 
+              <Card key={item.id} data={item}/>
+          )}
+        </Suspense>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import Card from "@/components/card";
+import Pagination from "@/components/pagination";
 
 import { api } from "@/constants/api"
 
@@ -24,15 +25,18 @@ const Home = () => {
   const [erro, setErro] = useState<boolean>(false);
   const [errorMsg, setErroMsg] = useState<string>("Não foi possivel buscar os dados");
   const [page, setPage] = useState<string>("");
+  const [totalPage, setTotalPage] = useState<string>("");
   const [name, setName] = useState<string>("");
+  
+  const handlePage = (i:string) => setPage(i)
 
 
   useEffect(() =>{
     api.get(`/characters?page=${page}`).then((result) => {
 
-      console.log(result)
       setErro(false)
       setData(result.data.items)
+      setTotalPage(result.data.meta.totalPages)
 
       if(result.data.items == ""){
         setErroMsg("Página não encontrada")
@@ -46,15 +50,10 @@ const Home = () => {
   })
 }, [page])
 
-  console.log(data);
-    
+
   return (
     <div className="w-full flex justify-center flex-col items-center gap-[40px]">
 
-      <div className="flex justify-center w-full gap-[30px]">
-        <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setPage(e.target.value)} type="text" placeholder="Página 1/6"/>
-        {/* <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setName(e.target.value)} type="text" placeholder="Personagem"/> */}
-      </div>
 
       {erro && 
 
@@ -64,11 +63,19 @@ const Home = () => {
       
       }
 
-      <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
-        {data.map(item => 
-          <Card key={item.id} data={item}/>
-        )}
-      </div>
+      <Suspense fallback={
+        <div className="bg-pallete01 p-[40px] text-[30px] font-bold "> Loading...</div>
+      }>
+        <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
+          {data.map(item => 
+              <Card key={item.id} data={item}/>
+          )}
+        </div>
+      </Suspense>
+
+      <footer className="p-[20px]">
+        <Pagination page={page} className={"flex justify-center gap-[20px]"} qtd={totalPage} set={handlePage}/>
+      </footer>
     </div>
   );
 }

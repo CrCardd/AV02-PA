@@ -23,14 +23,16 @@ const ServerSide = async () =>{
     return(
         <>
         <div className="flex flex-col">
-            <Suspense fallback={<div> Loading...</div>}>
+            <Suspense fallback={
+                <div className="bg-pallete01 p-[40px] text-[30px] font-bold "> Loading...</div>
+            }>
                 <div className="w-full flex justify-center">
-                    <div className="flex flex-wrap justify-center w-[70%] gap-[40px]">
+                    <div className="flex flex-wrap justify-center w-[70%] gap-[40px] mb-[100px]">
                         {data.items.map((item) => {
                             return(
                                 <div key={item.id} className="relative">
                                         <Card data={item}/>
-                                        <Link href={`/character/${item.id}`} className="absolute top-[2%] right-[5%] bg-pallete04 font-bold text-pallete01 p-[10px] z-30 rounded-[7px]"> Abrir</Link>
+                                        <Link href={`/character/${item.id}`} className="absolute top-[5%] right-[5%] bg-pallete04 font-bold text-pallete01 p-[10px] z-30 rounded-[7px]"> Abrir</Link>
                                 </div>
                             )
                         })}
