@@ -24,14 +24,37 @@ const Home = () => {
 
   const [erro, setErro] = useState<boolean>(false);
   const [errorMsg, setErroMsg] = useState<string>("Não foi possivel buscar os dados");
-  const [page, setPage] = useState<string>("");
-  const [totalPage, setTotalPage] = useState<string>("");
+  const [page, setPage] = useState<string>("1");
+  const [totalPage, setTotalPage] = useState<string>("0");
   const [name, setName] = useState<string>("");
+  const [withName, setWithName] = useState<boolean>(false);
+
   
   const handlePage = (i:string) => setPage(i)
+  const handleName = () => setWithName(false)
 
 
   useEffect(() =>{
+    if(name != "")
+      api.get(`/characters?name=${name}`).then((result) => {
+
+        console.log(result.data)
+        setErro(false)
+        setData(result.data)
+        setTotalPage("0")
+  
+        if(result.data == ""){
+          setErroMsg("Personagem não encontrado")
+          setErro(true);
+        }
+      }).catch((error) =>{
+        // if(error.response.status === 404){
+          // setErroMsg("Página não encontrada")
+          // }
+          // setErro(true);
+      })
+
+    else
     api.get(`/characters?page=${page}`).then((result) => {
 
       setErro(false)
@@ -43,16 +66,21 @@ const Home = () => {
         setErro(true);
       }
     }).catch((error) =>{
-      // if(error.response.status === 404){
-        // setErroMsg("Página não encontrada")
-        // }
-        // setErro(true);
+      // if(error.response.status === 500){
+      //   setErroMsg("O que aconteceu?")
+      //   }
+      //   setErro(true);
   })
-}, [page])
+
+}, [page,name])
 
 
   return (
     <div className="w-full flex justify-center flex-col items-center gap-[40px]">
+
+      <div className="flex justify-center w-full gap-[30px]">
+        <input className="rounded-[8px] p-[5px] text-center" onChange={(e) => setName(e.target.value)} type="text" placeholder="Personagem"/>
+      </div>
 
 
       {erro && 
@@ -73,8 +101,8 @@ const Home = () => {
         </div>
       </Suspense>
 
-      <footer className="p-[20px]">
-        <Pagination page={page} className={"flex justify-center gap-[20px]"} qtd={totalPage} set={handlePage}/>
+      <footer className="p-[20px] flex">
+        <Pagination totalPx={630} page={page} className={"w-full flex justify-center gap-[20px] "} qtd={totalPage} set={handlePage}/>
       </footer>
     </div>
   );
